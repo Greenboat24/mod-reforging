@@ -143,6 +143,9 @@ private:
             if (sItemReforge->FindItemStat(itemStats, rstat) != nullptr)
                 continue;
 
+            if (ItemReforge::IsPrimaryStat(stat) != ItemReforge::IsPrimaryStat(rstat))
+                continue;
+
             AddGossipItemFor(player, GOSSIP_ICON_INTERACT_1, ItemReforge::TextGreen("+" + Acore::ToString(taken) + " " + sItemReforge->StatTypeToString(rstat)), GOSSIP_SENDER_MAIN + 10 + stat, rstat, "Are you sure you want to reforge this item?", 0, false);
         }
 

@@ -20,7 +20,7 @@ public:
     };
 private:
     static constexpr float PERCENTAGE_MIN = 10.0f;
-    static constexpr float PERCENTAGE_MAX = 90.0f;
+    static constexpr float PERCENTAGE_MAX = 100.0f;
     static constexpr const char* RED_COLOR = "b50505";
     static constexpr const char* GREEN_COLOR = "056e3a";
     static constexpr uint32 MAX_REFORGEABLE_STATS = 15;
@@ -81,6 +81,8 @@ public:
     void HandleCharacterRemove(uint32 guid);
 
     void HandleStatModifier(Player* player, uint32 statType, int32 val, bool apply);
+
+    static bool IsPrimaryStat(uint32 statType);
 
     static void SendMessage(Player* player, const std::string& message);
     static std::string TextRed(const std::string& text);

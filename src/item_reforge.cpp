@@ -259,6 +259,9 @@ bool ItemReforge::IsReforgeable(const Player* player, const Item* item) const
     if (item->GetOwnerGUID() != player->GetGUID())
         return false;
 
+    if (item->GetGuidValue(ITEM_FIELD_CREATOR).IsEmpty())
+        return false;
+
     if (reforgeableStats.empty())
         return false;
 
@@ -464,6 +467,23 @@ void ItemReforge::HandleCharacterRemove(uint32 guid)
             it = reforgingDataMap.erase(it);
         else
             ++it;
+    }
+}
+
+/*static*/ bool ItemReforge::IsPrimaryStat(uint32 statType)
+{
+    switch (statType)
+    {
+        case ITEM_MOD_MANA:
+        case ITEM_MOD_HEALTH:
+        case ITEM_MOD_AGILITY:
+        case ITEM_MOD_STRENGTH:
+        case ITEM_MOD_INTELLECT:
+        case ITEM_MOD_SPIRIT:
+        case ITEM_MOD_STAMINA:
+            return true;
+        default:
+            return false;
     }
 }
 
